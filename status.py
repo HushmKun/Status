@@ -8,17 +8,18 @@ from lib.machine import Machine
 from lib.cache import Cache
 
 
-machine = Machine()
-cache = Cache()
+# machine = Machine()
+# cache = Cache()
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
 
-async def get_status():
-	if cache.should_update():
-		info = await machine.get_full_info()
-		cache.update(info)
-	return cache.get()
+def get_status():
+	# if cache.should_update():
+	# 	info = await machine.get_full_info()
+	# 	cache.update(info)
+	data = {"cpu": {"model": "Intel(R) Celeron(R) J6412 @ 2.00GHz", "utilisation": 0.0, "temperatures": {"Core 0": [34.0, 105.0], "Core 1": [35.0, 105.0], "Core 2": [34.0, 105.0], "Core 3": [34.0, 105.0]}, "frequencies": {"cpu0": {"now": 800, "min": 800, "base": null, "max": 2001}, "cpu1": {"now": 800, "min": 800, "base": null, "max": 2001}, "cpu2": {"now": 800, "min": 800, "base": null, "max": 2001}, "cpu3": {"now": 800, "min": 800, "base": null, "max": 2001}}, "count": 4, "cache": 4096, "cores": 4}, "memory": {"total": 7626637, "available": 6814392, "cached": 2099818, "swap_total": 4294963, "swap_available": 4294963, "processes": 142}, "storage": {"OS": {"icon": "settings", "total": 62763018649.6, "available": 49809514496}, "1722": {"icon": "folder", "total": 77463552, "available": 0}, "2963": {"icon": "folder", "total": 146407424, "available": 0}, "23545": {"icon": "folder", "total": 46661632, "available": 0}}, "network": {"interface": "enp3s0", "speed": 100, "rx": 876229956, "tx": 207546253}, "host": {"uptime": 430295.94, "os": "Ubuntu 24.10", "hostname": "home_server", "app_memory": "32064", "loadavg": [0.0, 0.01, 0.0]}} 
+	return data
 
 
 routes = web.RouteTableDef()
@@ -32,7 +33,7 @@ async def index(request):
 @routes.get("/api/status")
 async def api(request):
 	try:
-		return web.json_response(await get_status())
+		return web.json_response(get_status())
 	except:
 		report = traceback.format_exc().replace(f"{working_dir}/", "")
 		return web.Response(text=report, status=500)

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,13 +7,18 @@
 	<meta charset="utf-8">
 	<meta name="theme-color" content="#000">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link href="img/icon.png" rel="icon">
-	<link rel="stylesheet" type="text/css" href="css/colors.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/light.css">
-	<script type="text/javascript" src="js/utils.js"></script>
-	<script type="text/javascript" src="js/parser.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+
+	<link href="{% static 'img/icon.png' %}" rel="icon">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/light.css' %}">
+
+	<script type="text/javascript" src="{% static 'js/utils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/parser.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+	
+	<script type="text/javascript" src="{% static 'js/htmx.min.js' %}"></script>
+
 </head>
 <body>
 	<!-- Main screen -->
@@ -19,14 +26,14 @@
 		<div class="wrapper">
 			<div class="title-main"><div>Status</div></div>
 			<div class="center titlebar">
-				<div class="value" id="main-device-name">N/A</div>
+				<div class="value" id="main-device-name" hx-get="#"><em>Loading...</em></div>
 			</div>
-			<div class="center titlebar">
+			{% comment %} <div class="center titlebar">
 				<button onclick="goto('theme')">
 					<i>palette</i>
 					<p>Theme</p>
 				</button>
-			</div>
+			</div> {% endcomment %}
 			<div class="contents">
 				<div class="list">
 					<div class="item clickable" onclick="goto('cpu')">

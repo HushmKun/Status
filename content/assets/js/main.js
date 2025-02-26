@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	try {
 		let accent = localStorage.getItem("statusapp-accent")
 		if (accent) selectAccent(accent, false)
-		else selectAccent("red", false)
+		else selectAccent("lightblue", false)
 		let theme = localStorage.getItem("statusapp-light")
 		if (theme) selectTheme(theme == "true", false)
 		else selectTheme(false, false)
